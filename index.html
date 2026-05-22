@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X FEST 2026</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:linear-gradient(to bottom,#8fe3ff,#ffffff);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .container{
+      width:100%;
+      max-width:450px;
+      background:#fff;
+      border-radius:25px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* BANNER */
+
+    .banner{
+      width:100%;
+      height:260px;
+      overflow:hidden;
+    }
+
+    .banner img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* FORM */
+
+    .form-box{
+      padding:25px;
+    }
+
+    .title{
+      text-align:center;
+      font-size:28px;
+      font-weight:bold;
+      color:#ff0099;
+      margin-bottom:25px;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:bold;
+      color:#333;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea{
+      width:100%;
+      padding:14px;
+      border-radius:14px;
+      border:2px solid #ddd;
+      outline:none;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus,
+    .input-group textarea:focus{
+      border-color:#ff00aa;
+      box-shadow:0 0 10px rgba(255,0,170,0.3);
+    }
+
+    /* TIKET */
+
+    .ticket-box{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+      margin-top:10px;
+    }
+
+    .ticket{
+      background:linear-gradient(135deg,#ff00aa,#ff5fd2);
+      border-radius:18px;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+      overflow:hidden;
+    }
+
+    .ticket:hover{
+      transform:scale(1.03);
+    }
+
+    .ticket input{
+      display:none;
+    }
+
+    .ticket-content{
+      padding:15px;
+      text-align:center;
+      border:3px solid transparent;
+      border-radius:18px;
+    }
+
+    .ticket input:checked + .ticket-content{
+      border:3px solid yellow;
+    }
+
+    .ticket h3{
+      font-size:22px;
+      margin-bottom:10px;
+    }
+
+    .ticket p{
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .price{
+      margin-top:10px;
+      display:block;
+      font-weight:bold;
+      color:yellow;
+    }
+
+    /* QRIS */
+
+    .qris-box{
+      width:100%;
+      text-align:center;
+      margin-top:10px;
+    }
+
+    .qris-box img{
+      width:220px;
+      max-width:100%;
+      border-radius:15px;
+      border:3px solid #ff00aa;
+      padding:10px;
+      background:white;
+    }
+
+    /* BUTTON */
+
+    .btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:15px;
+      background:linear-gradient(90deg,#ff0099,#ff4fc3);
+      color:white;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      margin-top:10px;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(255,0,170,0.4);
+    }
+
+    /* FOOTER */
+
+    .footer{
+      text-align:center;
+      padding:15px;
+      font-size:13px;
+      color:#666;
+      background:#f7f7f7;
+    }
+
+    @media(max-width:500px){
+
+      .ticket-box{
+        grid-template-columns:1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- BANNER -->
+    <div class="banner">
+      <img src="banner.png" alt="Banner XFest">
+    </div>
+
+    <!-- FORM -->
+    <div class="form-box">
+
+      <div class="title">
+        FORM PENDAFTARAN
+      </div>
+
+      <form>
+
+        <!-- NAMA -->
+
+        <div class="input-group">
+          <label>Nama Lengkap</label>
+          <input type="text" placeholder="Masukkan nama lengkap" required>
+        </div>
+
+        <!-- EMAIL -->
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" placeholder="Masukkan email aktif" required>
+        </div>
+
+        <!-- WHATSAPP -->
+
+        <div class="input-group">
+          <label>Nomor WhatsApp</label>
+          <input type="number" placeholder="08xxxxxxxxxx" required>
+        </div>
+
+        <!-- ALAMAT -->
+
+        <div class="input-group">
+          <label>Alamat Lengkap</label>
+          <textarea rows="4" placeholder="Masukkan alamat lengkap"></textarea>
+        </div>
+
+        <!-- PILIH TIKET -->
+
+        <div class="input-group">
+
+          <label>Pilih Tiket</label>
+
+          <div class="ticket-box">
+
+            <!-- VIP -->
+
+            <label class="ticket">
+
+              <input type="radio" name="tiket" required>
+
+              <div class="ticket-content">
+
+                <h3>VIP</h3>
+
+                <p>
+                  Sendiri : 159K<br>
+                  Berdua : 279K<br>
+                  Berempat : 519K
+                </p>
+
+                <span class="price">
+                  BEST SELLER
+                </span>
+
+              </div>
+
+            </label>
+
+            <!-- REGULER -->
+
+            <label class="ticket">
+
+              <input type="radio" name="tiket">
+
+              <div class="ticket-content">
+
+                <h3>REGULER</h3>
+
+                <p>
+                  Sendiri : 99K<br>
+                  Berdua : 189K<br>
+                  Berempat : 359K
+                </p>
+
+                <span class="price">
+                  HEMAT
+                </span>
+
+              </div>
+
+            </label>
+
+          </div>
+
+        </div>
+
+        <!-- JUMLAH -->
+
+        <div class="input-group">
+
+          <label>Jumlah Tiket</label>
+
+          <select required>
+            <option value="">-- Pilih Jumlah --</option>
+            <option>1 Orang</option>
+            <option>2 Orang</option>
+            <option>4 Orang</option>
+          </select>
+
+        </div>
+
+        <!-- PEMBAYARAN -->
+
+        <div class="input-group">
+
+          <label>Metode Pembayaran</label>
+
+          <select required>
+            <option value="">-- Pilih Pembayaran --</option>
+            <option>DANA</option>
+            <option>OVO</option>
+            <option>GOPAY</option>
+            <option>QRIS</option>
+            <option>Transfer Bank</option>
+          </select>
+
+        </div>
+
+        <!-- QRIS -->
+
+        <div class="input-group">
+
+          <label>QRIS Pembayaran</label>
+
+          <div class="qris-box">
+            <img src="qris.png" alt="QRIS Payment">
+          </div>
+
+        </div>
+
+        <!-- UPLOAD BUKTI -->
+
+        <div class="input-group">
+
+          <label>Upload Bukti Pembayaran</label>
+
+          <input type="file" accept="image/*" required>
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button type="submit" class="btn">
+          DAFTAR SEKARANG
+        </button>
+
+      </form>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+      © 2026 X FEST INDONESIA - ALL RIGHTS RESERVED
+    </div>
+
+  </div>
+
+</body>
+</html>
