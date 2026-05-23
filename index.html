@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>X FEST 2026</title>
 
   <style>
@@ -11,7 +12,7 @@
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family:Arial, sans-serif;
+      font-family:Arial,sans-serif;
     }
 
     body{
@@ -30,6 +31,18 @@
       border-radius:25px;
       overflow:hidden;
       box-shadow:0 10px 30px rgba(0,0,0,0.2);
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
     }
 
     /* BANNER */
@@ -38,6 +51,7 @@
       width:100%;
       height:260px;
       overflow:hidden;
+      position:relative;
     }
 
     .banner img{
@@ -45,6 +59,17 @@
       height:100%;
       object-fit:cover;
       display:block;
+    }
+
+    .banner::after{
+      content:'X FEST 2026';
+      position:absolute;
+      bottom:20px;
+      left:20px;
+      color:white;
+      font-size:32px;
+      font-weight:bold;
+      text-shadow:0 5px 10px rgba(0,0,0,0.4);
     }
 
     /* FORM */
@@ -82,6 +107,7 @@
       outline:none;
       font-size:15px;
       transition:0.3s;
+      background:#fff;
     }
 
     .input-group input:focus,
@@ -89,6 +115,10 @@
     .input-group textarea:focus{
       border-color:#ff00aa;
       box-shadow:0 0 10px rgba(255,0,170,0.3);
+    }
+
+    textarea{
+      resize:none;
     }
 
     /* TIKET */
@@ -107,6 +137,7 @@
       cursor:pointer;
       transition:0.3s;
       overflow:hidden;
+      position:relative;
     }
 
     .ticket:hover{
@@ -122,10 +153,12 @@
       text-align:center;
       border:3px solid transparent;
       border-radius:18px;
+      transition:0.3s;
     }
 
     .ticket input:checked + .ticket-content{
       border:3px solid yellow;
+      background:rgba(255,255,255,0.1);
     }
 
     .ticket h3{
@@ -160,13 +193,18 @@
       border:3px solid #ff00aa;
       padding:10px;
       background:white;
+      transition:0.3s;
+    }
+
+    .qris-box img:hover{
+      transform:scale(1.03);
     }
 
     /* BUTTON */
 
     .btn{
       width:100%;
-      padding:15px;
+      padding:16px;
       border:none;
       border-radius:15px;
       background:linear-gradient(90deg,#ff0099,#ff4fc3);
@@ -176,11 +214,17 @@
       cursor:pointer;
       transition:0.3s;
       margin-top:10px;
+      position:relative;
+      overflow:hidden;
     }
 
     .btn:hover{
       transform:translateY(-2px);
       box-shadow:0 8px 20px rgba(255,0,170,0.4);
+    }
+
+    .btn:active{
+      transform:scale(0.98);
     }
 
     /* FOOTER */
@@ -193,10 +237,79 @@
       background:#f7f7f7;
     }
 
+    /* SUCCESS PAGE */
+
+    .success-page{
+      display:none;
+      padding:40px 25px;
+      text-align:center;
+      animation:fadeIn 0.8s ease;
+    }
+
+    .check{
+      width:100px;
+      height:100px;
+      margin:auto;
+      border-radius:50%;
+      background:linear-gradient(135deg,#00d26a,#00a651);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-size:50px;
+      font-weight:bold;
+      box-shadow:0 10px 25px rgba(0,210,106,0.4);
+      animation:pop 0.5s ease;
+    }
+
+    @keyframes pop{
+      0%{
+        transform:scale(0);
+      }
+      100%{
+        transform:scale(1);
+      }
+    }
+
+    .success-title{
+      font-size:30px;
+      color:#00a651;
+      font-weight:bold;
+      margin-top:25px;
+    }
+
+    .success-text{
+      margin-top:15px;
+      color:#555;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .success-btn{
+      display:inline-block;
+      margin-top:25px;
+      padding:14px 25px;
+      border-radius:15px;
+      text-decoration:none;
+      background:linear-gradient(90deg,#ff0099,#ff4fc3);
+      color:white;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .success-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(255,0,170,0.4);
+    }
+
     @media(max-width:500px){
 
       .ticket-box{
         grid-template-columns:1fr;
+      }
+
+      .banner{
+        height:220px;
       }
 
     }
@@ -208,169 +321,201 @@
 
   <div class="container">
 
-    <!-- BANNER -->
-    <div class="banner">
-      <img src="banner.png" alt="Banner XFest">
-    </div>
+    <!-- FORM PAGE -->
 
-    <!-- FORM -->
-    <div class="form-box">
+    <div id="formPage">
 
-      <div class="title">
-        FORM PENDAFTARAN
+      <!-- BANNER -->
+
+      <div class="banner">
+        <img src="banner.png" alt="Banner X FEST">
       </div>
 
-      <form>
+      <!-- FORM -->
 
-        <!-- NAMA -->
+      <div class="form-box">
 
-        <div class="input-group">
-          <label>Nama Lengkap</label>
-          <input type="text" placeholder="Masukkan nama lengkap" required>
+        <div class="title">
+          FORM PENDAFTARAN
         </div>
 
-        <!-- EMAIL -->
+        <form id="registerForm">
 
-        <div class="input-group">
-          <label>Email</label>
-          <input type="email" placeholder="Masukkan email aktif" required>
-        </div>
+          <!-- NAMA -->
 
-        <!-- WHATSAPP -->
+          <div class="input-group">
+            <label>Nama Lengkap</label>
+            <input type="text" placeholder="Masukkan nama lengkap" required>
+          </div>
 
-        <div class="input-group">
-          <label>Nomor WhatsApp</label>
-          <input type="number" placeholder="08xxxxxxxxxx" required>
-        </div>
+          <!-- EMAIL -->
 
-        <!-- ALAMAT -->
+          <div class="input-group">
+            <label>Email</label>
+            <input type="email" placeholder="Masukkan email aktif" required>
+          </div>
 
-        <div class="input-group">
-          <label>Alamat Lengkap</label>
-          <textarea rows="4" placeholder="Masukkan alamat lengkap"></textarea>
-        </div>
+          <!-- WHATSAPP -->
 
-        <!-- PILIH TIKET -->
+          <div class="input-group">
+            <label>Nomor WhatsApp</label>
+            <input type="tel" placeholder="08xxxxxxxxxx" required>
+          </div>
 
-        <div class="input-group">
+          <!-- ALAMAT -->
 
-          <label>Pilih Tiket</label>
+          <div class="input-group">
+            <label>Alamat Lengkap</label>
+            <textarea rows="4" placeholder="Masukkan alamat lengkap"></textarea>
+          </div>
 
-          <div class="ticket-box">
+          <!-- PILIH TIKET -->
 
-            <!-- VIP -->
+          <div class="input-group">
 
-            <label class="ticket">
+            <label>Pilih Tiket</label>
 
-              <input type="radio" name="tiket" required>
+            <div class="ticket-box">
 
-              <div class="ticket-content">
+              <!-- VIP -->
 
-                <h3>VIP</h3>
+              <label class="ticket">
 
-                <p>
-                  Sendiri : 159K<br>
-                  Berdua : 279K<br>
-                  Berempat : 519K
-                </p>
+                <input type="radio" name="tiket" required>
 
-                <span class="price">
-                  BEST SELLER
-                </span>
+                <div class="ticket-content">
 
-              </div>
+                  <h3>VIP</h3>
 
-            </label>
+                  <p>
+                    Sendiri : 159K<br>
+                    Berdua : 279K<br>
+                    Berempat : 519K
+                  </p>
 
-            <!-- REGULER -->
+                  <span class="price">
+                    BEST SELLER
+                  </span>
 
-            <label class="ticket">
+                </div>
 
-              <input type="radio" name="tiket">
+              </label>
 
-              <div class="ticket-content">
+              <!-- REGULER -->
 
-                <h3>REGULER</h3>
+              <label class="ticket">
 
-                <p>
-                  Sendiri : 99K<br>
-                  Berdua : 189K<br>
-                  Berempat : 359K
-                </p>
+                <input type="radio" name="tiket">
 
-                <span class="price">
-                  HEMAT
-                </span>
+                <div class="ticket-content">
 
-              </div>
+                  <h3>REGULER</h3>
 
-            </label>
+                  <p>
+                    Sendiri : 99K<br>
+                    Berdua : 189K<br>
+                    Berempat : 359K
+                  </p>
+
+                  <span class="price">
+                    HEMAT
+                  </span>
+
+                </div>
+
+              </label>
+
+            </div>
 
           </div>
 
-        </div>
+          <!-- JUMLAH -->
 
-        <!-- JUMLAH -->
+          <div class="input-group">
 
-        <div class="input-group">
+            <label>Jumlah Tiket</label>
 
-          <label>Jumlah Tiket</label>
+            <select required>
+              <option value="">-- Pilih Jumlah --</option>
+              <option>1 Orang</option>
+              <option>2 Orang</option>
+              <option>4 Orang</option>
+            </select>
 
-          <select required>
-            <option value="">-- Pilih Jumlah --</option>
-            <option>1 Orang</option>
-            <option>2 Orang</option>
-            <option>4 Orang</option>
-          </select>
-
-        </div>
-
-        <!-- PEMBAYARAN -->
-
-        <div class="input-group">
-
-          <label>Metode Pembayaran</label>
-
-          <select required>
-            <option value="">-- Pilih Pembayaran --</option>
-            <option>DANA</option>
-            <option>OVO</option>
-            <option>GOPAY</option>
-            <option>QRIS</option>
-            <option>Transfer Bank</option>
-          </select>
-
-        </div>
-
-        <!-- QRIS -->
-
-        <div class="input-group">
-
-          <label>QRIS Pembayaran</label>
-
-          <div class="qris-box">
-            <img src="qris.png" alt="QRIS Payment">
           </div>
 
-        </div>
+          <!-- PEMBAYARAN -->
 
-        <!-- UPLOAD BUKTI -->
+          <div class="input-group">
 
-        <div class="input-group">
+            <label>Metode Pembayaran</label>
 
-          <label>Upload Bukti Pembayaran</label>
+            <select required>
+              <option value="">-- Pilih Pembayaran --</option>
+              <option>DANA</option>
+              <option>OVO</option>
+              <option>GOPAY</option>
+              <option>QRIS</option>
+              <option>Transfer Bank</option>
+            </select>
 
-          <input type="file" accept="image/*" required>
+          </div>
 
-        </div>
+          <!-- QRIS -->
 
-        <!-- BUTTON -->
+          <div class="input-group">
 
-        <button type="submit" class="btn">
-          DAFTAR SEKARANG
-        </button>
+            <label>QRIS Pembayaran</label>
 
-      </form>
+            <div class="qris-box">
+              <img src="qris.png" alt="QRIS Payment">
+            </div>
+
+          </div>
+
+          <!-- UPLOAD -->
+
+          <div class="input-group">
+
+            <label>Upload Bukti Pembayaran</label>
+
+            <input type="file" accept="image/*" required>
+
+          </div>
+
+          <!-- BUTTON -->
+
+          <button type="submit" class="btn">
+            DAFTAR SEKARANG
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <!-- SUCCESS PAGE -->
+
+    <div class="success-page" id="successPage">
+
+      <div class="check">
+        ✓
+      </div>
+
+      <div class="success-title">
+        PEMBAYARAN BERHASIL
+      </div>
+
+      <div class="success-text">
+        Terima kasih telah melakukan pendaftaran X FEST 2026.<br><br>
+        Data dan bukti pembayaran kamu sudah berhasil dikirim.<br>
+        Tiket akan segera diproses oleh panitia.
+      </div>
+
+      <a href="" class="success-btn">
+        KEMBALI KE FORM
+      </a>
 
     </div>
 
@@ -381,6 +526,30 @@
     </div>
 
   </div>
+
+  <script>
+
+    const form = document.getElementById('registerForm');
+
+    form.addEventListener('submit', function(e){
+
+      e.preventDefault();
+
+      // sembunyikan form
+      document.getElementById('formPage').style.display = 'none';
+
+      // tampilkan halaman sukses
+      document.getElementById('successPage').style.display = 'block';
+
+      // scroll ke atas
+      window.scrollTo({
+        top:0,
+        behavior:'smooth'
+      });
+
+    });
+
+  </script>
 
 </body>
 </html>
